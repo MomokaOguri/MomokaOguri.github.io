@@ -176,7 +176,7 @@ input, select, textarea {
 	}
 
 	p {
-		text-align: justify;
+		/* text-align: justify; */
 		margin: 0 0 2rem 0;
 	}
 
@@ -321,6 +321,7 @@ input, select, textarea {
 	hr {
 		border-bottom-color: #eeeeee;
 	}
+
 
 /* Row */
 

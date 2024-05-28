@@ -44,9 +44,65 @@
 									<h1>Data Cleaning in SQL</h1>
 									<p>Personal Project</p>
 								</header>
-								<div class="image main"><img src="images/pic01.jpg" alt="" /></div>
-								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur sapien risus, commodo eget turpis at, elementum convallis enim turpis, lorem ipsum dolor sit amet nullam.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus. Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum.</p>
+
+								<ul class="actions special">
+									<li><a href="https://github.com/MomokaOguri/SQL-projects/blob/main/data%20cleaning.sql" target="_blank" class="button large">View Code</a></li>
+								</ul>
+								
+								<h2>Steps</h2>
+								<ol>
+									<li>Create Staging Table</li>
+									<li>Revmove Duplicates</li>
+									<li>Standardize the Data</li>
+									<li>Handle Null/Blank Values</li>
+									<li>Remove Any Columns</li>
+								</ol>
+
+								<h2>Resource</h2>
+								<p>Dataset: World Layoffs from <a href="https://github.com/AlexTheAnalyst/MySQL-YouTube-Series/blob/main/layoffs.csv">AlexTheAnalyst GitHub page</a></p>
+								<p>The dataset contains data about company, location, industry total number of laid off, percentage of laid off, date, stage of company, country, and fund raised in miilions.</p>
+								
+								<h2>Notes</h2>
+								<h3>Remove Duplicates</h3>
+								<ul>
+									<li>Identify duplicates using <code>ROW_NUMBER() OVER(PARTITION BY )</code> on combination of columns, and call it `row_num`</li>
+									<li>Check duplicate result & confirm it is duplicate and okay to be removed</li>
+									<li>Delete duplicates using <code>DELETE</code> and <code>WHERE row_num > 1</code></li>
+								</ul>
+
+								<h3>Standardize the Data</h3>
+								<ul>
+									<li>Check spellings and formats for each column</li>
+									<li>Useful code: <code>SELECT DISTINCT</code>, <code>TRIM</code>, <code>ORDER BY</code>, <code>WHERE [col_name] LIKE 'keyword%'</code></li>
+									<li>Update column using <code>UPDATE</code>, <code>SET</code></li>
+									<li>eg:
+<pre><code>UPDATE layoffs_staging2
+SET industry = 'Crypto'
+WHERE industry LIKE 'Crypto%';</code></pre>
+<pre><code>UPDATE layoffs_staging2
+SET country = TRIM(TRAILING '.' FROM country)
+WHERE country LIKE 'United States%';</code></pre>
+									</li>
+									<li>For date column, change from text to date using <code>str_to_date</code></li>
+									<li>Then, change data type using <code>ALTER TABLE [table_name] MODIFY COLUMN `date` DATE</code></li>
+								</ul>
+
+								<h3>Null/Blank Values</h3>
+								<li>Set 'None' and blank ('') to <code>NULL</code></li>
+								<li>Fill blanks from filled rows with the same company & location using <code>JOIN</code></li>
+<pre><code>UPDATE layoffs_staging2 t1
+JOIN layoffs_staging2 t2
+	ON t1.company = t2.company
+	AND t1.location = t2.location
+SET t1.industry = t2.industry
+WHERE t1.industry IS NULL
+AND t2.industry IS NOT NULL;</code></pre>	
+
+								<h3>Remove Any Redundant Rows, Columns</h3>
+								<li>Remove row using <code>DELETE</code></li>
+								<li>Remove column using <code>ALTER TABLE ... DROP COLUMN ...</code></li>
+								<li>In this case, when both total and percentage laid off column are blank, the row could be useless for layoff analysis</li>
+								<li>row_num column was only for identifying and deleting dupelicate rows, and now okay to be removed</li>
 							</section>
 
 					</div>

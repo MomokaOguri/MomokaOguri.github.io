@@ -116,7 +116,7 @@ input, select, textarea {
 /* Type */
 
 	html {
-		font-size: 16pt;
+		font-size: 14pt;
 	}
 
 		@media screen and (max-width: 1680px) {
@@ -208,7 +208,7 @@ input, select, textarea {
 	}
 
 	h3 {
-		font-size: 1.25rem;
+		font-size: 1.5rem;
 		margin: 0 0 1.5rem 0;
 	}
 
@@ -2872,6 +2872,11 @@ input, select, textarea {
 					padding-top: 0;
 				}
 
+		/* added for second list */
+		ul ul {
+			margin: 0;
+		}
+
 	dl {
 		margin: 0 0 2rem 0;
 	}
@@ -3788,7 +3793,7 @@ input, select, textarea {
 			}
 
 			#main > .post header.major > h1, #main > .post header.major h2 {
-				font-size: 4rem;
+				font-size: 3rem;
 				line-height: 1.1;
 				margin: 0 0 2rem 0;
 			}

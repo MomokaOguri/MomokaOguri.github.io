@@ -149,7 +149,13 @@ SUM(total_off) OVER(ORDER BY `MONTH`) AS rolling_total
 FROM CTE_Rolling_Total;</code></pre>
 									
 									<p><img src="images/proj2_detail2.png" width="100%"  alt="" /></p>
-									<p>Rolling total of layoffs by month allows to gain insight into how the layoffs progressed over time.</p>								
+									<p>
+										Rolling total of layoffs by month allows to gain insight into how the layoffs progressed over time. 
+										The number of layoffs is significantly high in Apr and May of 2020, quickly pushing the total since start of dataset to 62,142.
+										There are no significant surge, and the total number reach 100K in Feb 2022. 
+										From May 2022 to Feb 2023, the monthly layoffs rise to 5 digits, except for Sep 2022. 
+										Nov 2022, Jan and Feb 2023 saw the exceptionally high monthly layoffs: 53.5K, 84.7K, and 36.5K, respectively.
+									</p>								
 
 								<h4>Top 5 companies by layoffs per year</h4>
 <pre><code>WITH CTE_Company_Year (company, years, total_laid_off) AS(
@@ -167,10 +173,20 @@ FROM CTE_Company_Year_Rank
 WHERE Ranking <= 5;</code></pre>
 
 									<p><img src="images/proj2_detail3.png" width="100%" alt="" /></p>
-									<p>explain findings ...</p>								
+									<p>
+										The query uses two CTEs: first one to get sum of total layoffs by company and year, and 
+										second one to add <code>DENSE_RANK</code> and filter NOT NULL years. It then filters top 5 companies in each year.
+										<code>DENSE_RANK</code> allows to assign ranks numerically, instead of positionary, so that when there are tie, the next rank has '+1'. 
+										(eg: In 2023, Amazon and Salesforce both laid off 8,000 employees, ranking 4th. The next highest was Dell with 6,650 cuts, ranking 5th.)
+									</p>
+									<p>
+										In 2020, we see some companies in Transportation & Travel Industry (eg: Uber, Booking.com, Airbnb), 
+										as people were suddenly restricted for non-essential travels due to Covid lockdowns. 
+										Over 2021 to 2023, as the effects of Covid begin to normalize, we see layoffs concentrated more in Tech Industry.
+									</p>
 
 
-								<h3>Conclusions & Insights</h3>
+								<!-- <h3>Conclusions & Insights</h3> -->
 
 							</section>
 					</div>

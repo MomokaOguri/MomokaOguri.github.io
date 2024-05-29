@@ -42,14 +42,15 @@
 							<section class="post">
 								<header class="major">
 									<h1>Data Cleaning in SQL</h1>
-									<p>Personal Project</p>
+									<p>Personal Project - Data Prep for <a href="proj2.html">EDA in SQL</a></p>
 								</header>
 
 								<ul class="actions special">
 									<li><a href="https://github.com/MomokaOguri/SQL-projects/blob/main/data%20cleaning.sql" target="_blank" class="button large">View Code</a></li>
 								</ul>
 								
-								<h2>Steps</h2>
+								<h3>Objective</h3>
+								Clean data in SQL Server using following steps:
 								<ol>
 									<li>Create Staging Table</li>
 									<li>Revmove Duplicates</li>
@@ -58,19 +59,23 @@
 									<li>Remove Any Columns</li>
 								</ol>
 
-								<h2>Resource</h2>
-								<p>Dataset: World Layoffs from <a href="https://github.com/AlexTheAnalyst/MySQL-YouTube-Series/blob/main/layoffs.csv">AlexTheAnalyst GitHub page</a></p>
-								<p>The dataset contains data about company, location, industry total number of laid off, percentage of laid off, date, stage of company, country, and fund raised in miilions.</p>
+								<h3>Dataset</h3>
+								<ul>
+									<li>World Layoffs, 2020 - early 2023</li>
+									<li>Source: <a href="https://github.com/AlexTheAnalyst/MySQL-YouTube-Series/blob/main/layoffs.csv">AlexTheAnalyst GitHub page</a></li>
+									<li>Feilds: company, location, industry total number of laid off, percentage of laid off, date, stage of company, country, and fund raised in miilions</li>
+								</ul>
 								
-								<h2>Notes</h2>
-								<h3>Remove Duplicates</h3>
+								
+								<h3>Notes</h3>
+								<h4>Remove Duplicates</h4>
 								<ul>
 									<li>Identify duplicates using <code>ROW_NUMBER() OVER(PARTITION BY )</code> on combination of columns, and call it `row_num`</li>
 									<li>Check duplicate result & confirm it is duplicate and okay to be removed</li>
 									<li>Delete duplicates using <code>DELETE</code> and <code>WHERE row_num > 1</code></li>
 								</ul>
 
-								<h3>Standardize the Data</h3>
+								<h4>Standardize the Data</h4>
 								<ul>
 									<li>Check spellings and formats for each column</li>
 									<li>Useful code: <code>SELECT DISTINCT</code>, <code>TRIM</code>, <code>ORDER BY</code>, <code>WHERE [col_name] LIKE 'keyword%'</code></li>
@@ -87,7 +92,7 @@ WHERE country LIKE 'United States%';</code></pre>
 									<li>Then, change data type using <code>ALTER TABLE [table_name] MODIFY COLUMN `date` DATE</code></li>
 								</ul>
 
-								<h3>Null/Blank Values</h3>
+								<h4>Null/Blank Values</h4>
 								<li>Set 'None' and blank ('') to <code>NULL</code></li>
 								<li>Fill blanks from filled rows with the same company & location using <code>JOIN</code></li>
 <pre><code>UPDATE layoffs_staging2 t1
@@ -98,7 +103,7 @@ SET t1.industry = t2.industry
 WHERE t1.industry IS NULL
 AND t2.industry IS NOT NULL;</code></pre>	
 
-								<h3>Remove Any Redundant Rows, Columns</h3>
+								<h4>Remove Any Redundant Rows, Columns</h4>
 								<li>Remove row using <code>DELETE</code></li>
 								<li>Remove column using <code>ALTER TABLE ... DROP COLUMN ...</code></li>
 								<li>In this case, when both total and percentage laid off column are blank, the row could be useless for layoff analysis</li>

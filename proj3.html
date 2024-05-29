@@ -44,9 +44,90 @@
 									<h1>Airbnb Price Visualization in Tableau</h1>
 									<p>Personal Project</p>
 								</header>
+
 								<div class="image main"><img src="images/proj3_home.png" alt="" /></div>
-								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur sapien risus, commodo eget turpis at, elementum convallis enim turpis, lorem ipsum dolor sit amet nullam.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus. Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum.</p>
+								<ul class="actions special">
+									<li><a href="https://public.tableau.com/app/profile/momoka.oguri/viz/AirbnbPrice_17169217740600/Dashboard1" target="_blank" class="button large">View Dashboard</a></li>
+								</ul>
+
+								<h3>Objective</h3>
+								<p>In this project, I analyzed Airbnb listing data from 2016 to gain insights into listing competition by number of bedrooms and locations, and time of the year.</p>
+								
+								<h3>Dataset</h3>
+								<ul>
+									<li>Airbnb Listings 2016</li>
+									<li>Source: <a href="https://insideairbnb.com/get-the-data/" target="_blank">Inside Airbnb</a>, <a href="https://www.kaggle.com/datasets/alexanderfreberg/airbnb-listings-2016-dataset" target="_blank">Airbnb 2016 (Kaggle)</a></li>
+									<li>Fields: id, listing url, name, neighbourhood, city, state, zipcode, country, latitude, longitude, 
+										property type, room type, accomodates, bathrooms, bedrooms, price, availability, reviews</li>
+									<li>Size: 3818 rows in Listings, 1.05m rows in Calendar, did not use Reviews data as it exceeds the Tableau processing limit</li>
+									<li>Preprocessing: cleaned missing values</li>
+								</ul>
+
+								<h3>Visualizations & Insights</h3>
+								<h4>Average Price per Bedroom (Bar Chart)</h4>
+								<ul>
+									<li>Viz choice: shows how price increases in ratio with the number of bedroom</li>
+									<li>Data Transofrmation:</li>
+									<ul>
+										<li>Convert `Bedroom` column from continuous measure to dimension</li>
+										<li>Aggregate average of prices by number of bedrooms - use sum of prices for insights into which number of bedrooms is most popular or brings in most money</li>
+									</ul>
+									<li>The average price of listings rises gradually with the number of bedrooms.</li>
+								</ul>
+
+								<h4>Distinct Count of Listings by Number of Bedrooms (Table Visual)</h4>
+								<ul>
+									<li>Viz Choice: Unlike average price per bedroom, it has a large difference in the number from 5 to 1,811 in only 6 elements. It would be visually simple and easy to see the degree of competitiveness in Table Visual rather than Bar Chart.</li>
+									<li>The listings are significantly concentrated in 1-bedroom. Only around a quarter of listings for 2-bedroom, and the number of listings decrease further for listings with more bedrooms. There are only 5 listings for 6-bedroom. </li>
+									<li>Combined with insight from the average pricing per bedroom, the more bedroom the listing has, the less competitive it gets and the higher the host can charge.</li>
+								</ul>
+
+								<h4>Price by Zip Code (Map Visual)</h4>
+								<ul>
+									<li>Viz Choice: Using Zip Code to visually analyze the geographical distribution of prices and highlight areas with notably high or low prices.</li>
+									<li>All top 10 areas are within Middle & Midwest in the map. The lowest prices are along the most outer areas in the map. </li>
+								</ul>
+
+								<h4>Price by Zip Code (Bar Chart)</h4>
+								<ul>
+									<li>Viz Choice: Sort and use color graduation by average price by zip code. The same color graduation as Map Visual is used for comparison and deeper insights. </li>
+									<li>From the map, it is hard to tell the degree of price difference between areas. From the Bar Chart, the Industrial District (zip code: 98134) is significantly more expensive the second most expensive neighborhood.</li>
+									<li>The price difference is gradual from the second most to the least expensive neighborhood. </li>
+								</ul>
+
+								<h4>Revenue for the Year (Line Chart)</h4>
+								<ul>
+									<li>Viz Choice: Line chart for trend in revenue over the year for any insights into seasonal patterns or anomalies</li>
+									<li>Data Transformation:</li>
+									<ul>
+										<li>Aggregate sum of prices on weekly basis</li>
+										<li>Edit date range: Jan 1, 2016 to Dec 31, 2016</li>
+									</ul>
+									<li>Over Jan to Mar, the revenue is at the worst in the year. It quickly recovered in Jan and slowly rises to the annual average by Apr. </li>
+									<li>Highest revenues around early summer at the end of May to June and year-end.</li>
+								</ul>
+
+								<h3>Reflections & Next Steps</h3>
+								<h4>Learnings</h4>
+								<ul>
+									<li>Color coding across multiple visuals is very effective for further insights.</li>
+								</ul>
+								
+								<h4>Challenges</h4>
+								<ul>
+									<li>The dataset is large and has several columns with similar details, especially geographical data, room details, and reviews. Deciding which columns to use and keep was challenging. </li>
+								</ul>
+
+								<h4>Further Improvements</h4>
+								<ul>
+									<li>Instead of zip code, show the neighborhood name</li>
+									<li>Change the date label in the line chart to 1st date of each month while keeping data aggregated on weekly basis</li>
+									<li>Make more interactive across all visuals: </li>
+									<ul>
+										<li>Apply filter of number of bedrooms to other visuals by selecting on bar chart</li>
+										<li>Apple filter of zipcode or neighborhood to other visuals by selecting on either map or bar chart</li>
+									</ul>
+								</ul>
 							</section>
 							
 					</div>

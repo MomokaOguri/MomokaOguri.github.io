@@ -50,18 +50,20 @@
 								</ul>
 								
 								<h3>Objective</h3>
-								<p>In this project, I conducted an exploratory data analysis (EDA) on 
-									a dataset containing information about global layoffs from 2020 to early 2023 
-									to uncover patterns and insights related to the layoffs.
+								<p>
+									The primary goal of this project was to conduct an exploratory data analysis (EDA) on a dataset of global layoffs from 2020 to early 2023. 
+									The analysis aimed to uncover patterns and insights related to the layoffs, with specific objectives including:
 								</p>
+
 								<ul>
 									<li>Identify the most affected companies, industries, and countries</li>
 									<li>Analyze layoff trends over the specificed period</li>
+									<li>Understand the progression and impact of layoffs month by month</li>
 								</ul>
 
 								<h3>Dataset</h3>
 								<ul>
-									<li>World Layoffs, 2020 - early 2023</li>
+									<li>Global Layoffs, 2020 - early 2023</li>
 									<li><b>Source</b>: <a href="https://github.com/AlexTheAnalyst/MySQL-YouTube-Series/blob/main/layoffs.csv" target="_blank">AlexTheAnalyst GitHub page</a></li>
 									<li><b>Fields</b>: company, location, industry total number of laid off, percentage of laid off, date, stage of company, country, and fund raised in miilions</li>
 								</ul>
@@ -120,8 +122,7 @@
 								<h4>Date range of data</h4>
 								<p>
 									Use <code>MIN</code> & <code>MAX</code> on date column to get the date range of data: Mar 11, 2020 to Mar 6, 2023. 
-									The dataset effectively captures layoffs that were largely impacted by Covid lockdowns and regarding economics slowdowns.
-									From mid 2022 and into 2023, it will be effective in looking into the massive layoffs by major tech companies.
+									This range includes key events such as the COVID-19 lockdowns and economic downturns in 2020 and the significant tech industry layoffs in 2023.
 								</p>
 
 								<h4>Companies that went completely under</h4>
@@ -136,8 +137,9 @@ ORDER BY 2 DESC;</code></pre>
 								<ul>
 									<li><b>By company:</b> Major companies (eg: Amazon, Google, Meta, Salesforce, Microsoft) are in the top of the list.</li>
 									<li><b>By industry:</b> Consumer, retail, transportation industries were most affected.</li>
-									<li><b>By country:</b> US were significantly affected with respect to rest of the world. It could be partly due to the data collection methods. However, since many of major companies like above are located in the US, the number makes sense.</li>
-									<li><b>By year:</b> There are only 2 months of data for 2023, but it ranked as most affected of the period.</li>
+									<li><b>By country:</b> US was significantly affected with respect to rest of the world: US had 257K layoffs and India was the second most affected with 36K layoffs. 
+										It could be partly due to the data collection methods. However, since many of major companies like above are located in the US, the number seems justifiable.</li>
+									<li><b>By year:</b> There are only 2 months of data for 2023 in the dataset, but it ranked as the most affected year out of the time period.</li>
 								</ul>
 
 								<h4>Progression of layoffs</h4>
@@ -155,8 +157,9 @@ FROM CTE_Rolling_Total;</code></pre>
 									<p><img src="images/proj2_detail2.png" width="100%"  alt="" /></p>
 									<p>
 										Rolling total of layoffs by month allows to gain insight into how the layoffs progressed over time. 
-										The number of layoffs is significantly high in Apr and May of 2020, quickly pushing the total since start of dataset to 62,142.
-										There are no significant surge, and the total number reach 100K in Feb 2022. 
+										The number of layoffs is significantly high in Apr and May of 2020, quickly pushing the total since start of dataset to 62K. <br />
+										After that, there are no significant surge for about 2 years, and the total number reaches 100K in Feb 2022. 
+										Some months with the lowest, double-digit number of layoffs fall into the data range: Mar, July, and Oct 2021. <br /> 
 										From May 2022 to Feb 2023, the monthly layoffs rise to 5 digits, except for Sep 2022. 
 										Nov 2022, Jan and Feb 2023 saw the exceptionally high monthly layoffs: 53.5K, 84.7K, and 36.5K, respectively.
 									</p>								
@@ -180,13 +183,19 @@ WHERE Ranking <= 5;</code></pre>
 									<p>
 										The query uses two CTEs: first one to get sum of total layoffs by company and year, and 
 										second one to add <code>DENSE_RANK</code> and filter NOT NULL years. It then filters top 5 companies in each year.
-										<code>DENSE_RANK</code> allows to assign ranks numerically, instead of positionary, so that when there are tie, the next rank has '+1'. 
+										<code>DENSE_RANK</code> allows to assign ranks numerically, instead of positionary, so that when there are tie, the next rank does not skip a number. 
 										(eg: In 2023, Amazon and Salesforce both laid off 8,000 employees, ranking 4th. The next highest was Dell with 6,650 cuts, ranking 5th.)
 									</p>
 									<p>
-										In 2020, we see some companies in Transportation & Travel Industry (eg: Uber, Booking.com, Airbnb), 
-										as people were suddenly restricted for non-essential travels due to Covid lockdowns. 
-										Over 2021 to 2023, as the effects of Covid begin to normalize, we see layoffs concentrated more in Tech Industry.
+										Combined with the progression result above, we can further derive insights for reasons of high number of layoffs in some months.
+
+										In 2020, we see some companies in Transportation & Travel Industry (eg: Uber, Booking.com, Airbnb) ranked within the top 5 of most layoffs. 
+										We saw earlier that the layoffs number climbed rapidly in Apr and May and then slowed down gradually. The findings can related to 
+										restrictions on non-essential travels due to Covid lockdowns which likely caused cancellations and fall in revenue for business in the industry. 
+										The subsequent slowdown of the layoffs number helps explain the cancellation numbers and related economic behaviors being normalized. 
+
+										The top 5 most affected companies in 2022 and 2023 include many large companies in Tech Industry (eg: Meta, Amazon, Google, Microsoft, Salesforce). 
+										The finding provides insights that they have largely contributed to the recent massive layoffs in 2022 through the end of the dataset in early 2023.
 									</p>
 
 

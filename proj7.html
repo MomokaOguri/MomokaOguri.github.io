@@ -1,0 +1,247 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Tata Job Sim: KPI in Tableau</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">M. Oguri</a>
+					</header>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<ul class="links">
+						<li><a href="index.html">Projects</a></li>
+						<li><a href="about.html">About</a></li>
+					</ul>
+					<ul class="icons">
+						<li><a href="https://www.linkedin.com/in/momoka-o-b5b623115/" target="_blank" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://github.com/MomokaOguri" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+					</ul>
+				</nav>
+
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1>KPI Data Analysis & Visualization in Tableau</h1>
+									<p>Job simulation course by Tata Group on the Forage platform</a></p>
+								</header>
+
+								<div class="image main"><img src="images/proj7_home.png" alt="" /></div>
+								<ul class="actions special">
+									<li><a href="https://public.tableau.com/app/profile/momoka.oguri/viz/Forage_Tata/Dashboard1" target="_blank" class="button large">View Dashboard</a></li>
+								</ul>
+
+								
+								<h3>Objective</h3>
+								<p>
+									Analyze and present business data for an online retail store to assist in 
+									performance evaluation and strategic expansion planning.
+									Specific tasks include:
+								</p>
+
+								<ul>
+									<li>Review retail data to provide insights valuable to the CEO and CMO</li>
+									<li>Identify metrics for understanding revenue contributors and evaluatiing business performance</li>
+									<li>Choose right visuals for the metrics and create them</li>
+									<li>Communicate insights & analysis to CEO and CMO</li>
+								</ul>
+								
+								<h3>Dataset</h3>
+								<ul>
+									<li>Online Retail Orders</li>
+									<!-- <li>Source: </li> -->
+									<li><b>Fields: </b>InvoiceNo, StockCode, Description, Quantity, InvoiceDate, UnitPrice, CustomerID, Country</li>
+									<!-- <li><b>Size: </b>...</li> -->
+									<li><b>Preprocessing: </b>filtered out Quantity less than 1 and negative UnitPrice in data load</li>
+								</ul>
+								
+								
+								<h4>Fields Description:</h4>
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>Field</th>
+													<th>Description</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>InvoiceNo</td>
+													<td>invoice ID<br>- an invoice may have multiple products<br>- one CustomerID per invoice</td>
+												</tr>
+												<tr>
+													<td>StockCode</td>
+													<td>product ID</td>
+												</tr>
+												<tr>
+													<td>Description</td>
+													<td>product description</td>
+												</tr>
+												<tr>
+													<td>Quantity</td>
+													<td>number of products sold (negative = returns)</td>
+												</tr>
+												<tr>
+													<td>InvoiceDate</td>
+													<td>date of product sold</td>
+												</tr>
+												<tr>
+													<td>UnitPrice</td>
+													<td>unit price of product sold</td>
+												</tr>
+												<tr>
+													<td>CustomerID</td>
+													<td>customer ID<br>- some NULL</td>
+												</tr>
+												<tr>
+													<td>Country</td>
+													<td>country in which sale happened</td>
+												</tr>
+											</tbody>
+										</table>									
+									</div>
+
+								
+								
+								
+								<h3>Visualizations & Insights</h3>
+								<h4>1) Monthly revenue trend for 2011 to identify seasonality</h4>
+								<ul>
+									<li>Viz choice: line chart</li>
+									<li>Create a calculated field <code>`Revenue` = `Quantity` * `UnitPrice`</code></li>
+									<li>Findings: </li>
+									<ul>
+										<li>Revenue in first 8 months is fairly constant, with average about $685K.</li>
+										<li>Revenue starts to increase in Sept with 40% rise over the previous month.</li>
+										<li>The trends peak in Nov where it reaches $1.51M.</li>
+										<li>Data is incomplete for December, so no conclusion can be drawn.</li>
+									</ul>
+									
+									<li>Insights: </li>
+									<ul>
+										<li>Identify the reasons for seasonality and increase in revenue in the last 4 months of year.</li>
+										<li>Knowing the seasonality helps plan inventory management and any targeted campaigns.</li>
+									</ul>
+								</ul>
+
+								<p><img src="images/proj7_detail1.png" width="100%" alt="" /><br />
+									The top 10 products in Nov which generated the most monthly revenue include some party-related goods: night light, cakestand, and party-bunting.
+									This could be related to the holiday events at year-end.
+								</p>
+
+
+								<h4>2) Top 10 Countries by Revenue & Their Quantity to identify growth opportunity</h4>
+								<ul>
+									<li>Viz choice: Side-by-side bar chart</li>
+									<li>UK is excluded as the country already has high demand established.</li>
+									<li>Findings: </li>
+									<ul>
+										<li>Top revenue-generating countries are Netherlands, Ireland, Germany, and France.</li>
+										<li>Revenue and sales volume seems to have positive correlation.</li>
+									</ul>
+									<li>Insight: </li>
+									<ul>
+										<li>Merketing team can continue to target the top countries for further growth.</li>
+										<li>Japan is the only Asian country in the top 10 result. Identifying reasons for success in Japan can be helpful in building expansion strategy for Asian countries.</li>
+									</ul>
+								</ul>
+
+								<h4>3) Top 10 Customers by Revenue</h4>
+								<ul>
+									<li>Viz choice: bar chart</li>
+									<li>Findings: </li>
+									<ul>
+										<li>Among top 10 revenue-generating customers, the revenue contribution is somewhat concentrated in the top 2 customers (ID 14646, 18102).</li>
+										<li>The top customer contributes $280K of total revenue, which is close to the level by top countries such as Netherland and Ireland. They each generated around $285K.</li>
+										<li>From the size of average monthly revenue, the business seems to be not too dependent on the top few customers.</li>
+									</ul>
+									<li>Insight: </li>
+									<ul>
+										<li>The bargaining power of customers is low, and the business is in good position.</li>
+										<li>Top products bought by Customer #18102 includes memoboard and blackboard, which seems to be supllies for enterprise level.</li>
+										<li>Understanding the customer composition of private and enterpise would help build targeted marketing strategy.</li>
+										<li>Identifying their purchase pattern, whether frequent or one-time, is also a useful insight.</li>
+									</ul>
+								</ul>
+								<p><img src="images/proj7_detail2.png" width="100%" alt="" /></p>
+
+								<h4>4) Global Revenue Map</h4>
+								<ul>
+									<li>Viz choice: map chart</li>
+									<li>UK is excluded from the data for the same reason as above.</li>
+									<li>Findings: </li>
+									<ul>
+										<li>Most of the top revenue-generating countries are only in European region. 
+											The other regions, Australia, Asia, Americas, Africa, and Russia all have low revenues.</li>
+									</ul>
+									<li>Insight:</li>
+									<ul>
+										<li>Brand penetration seems to be high in European region, but the same cannot be said to the rest of the world.</li>
+										<li>Pursuing expansion strategy in other areas may require different strategy than in European region, but could seeks for potentially higher growth boost.</li>
+									</ul>
+								</ul>
+
+
+								<h3>Reflections & Next Steps</h3>
+								
+								<h4>Further Improvements</h4>
+								<ul>
+									<li>Make tooltip in charts dynamic by including a bar chart of top selling products by country, month, or customers being hovered over.</li>
+									<li>Visualize the percentage of users who made repeated orders and only made one-time purchases.</li>
+									<li>For customers who made repeated orders, identify how long it tooks them to make another order. This would provide appropriate timing to suggest next purchases for existing customers.</li>
+								</ul>
+								
+							</section>
+					</div>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<section class="split contact">
+						<section>
+							<h3>Social</h3>
+							<ul class="icons alt">
+								<li><a href="https://www.linkedin.com/in/momoka-o-b5b623115/" target="_blank" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+								<li><a href="https://github.com/MomokaOguri" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+							</ul>
+						</section>
+					</section>
+				</footer>
+
+				<!-- Copyright -->
+					<!-- <div id="copyright">
+						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div> -->
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
